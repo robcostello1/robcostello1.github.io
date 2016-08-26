@@ -8,6 +8,7 @@
 
 @import "design-elements/colors";
 @import "design-elements/fonts";
+@import "design-elements/fields";
 
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) and (orientation: landscape) {
   @import "conditional/ie11";
@@ -79,14 +80,15 @@ p {
 
 // Component: button
 
-.button {
+%button, .button {
   background: $colors-white;
   color: $colors-black;
-  padding: $v-unit/3 $v-unit*3 $v-unit/6;
+  padding: 0.7em $v-unit*3 0.5em;
   margin-bottom: $small-v-unit;
   display: inline-block;
   cursor: pointer;
   text-decoration: none;
+  text-transform: uppercase;
 }
 
 // Component: down arrow
@@ -269,8 +271,11 @@ $section-text-shadow-offset: 10%;
 }
 
   .cta-text {
-    font-size: 21px;
-    font-size: calc(9px + 1.5vw);
+    font-size: 0.8em;
+  }
+
+  .js-cta-link {
+    padding: 0.5em 2em 0.3em;
   }
 
 .js .js-cta-modal {
@@ -289,13 +294,30 @@ $section-text-shadow-offset: 10%;
   &.js-in {
     z-index: 20;
   }
+}
+
   .cta-modal-form {
-    background: transparentize($colors-black, 0.3);
+    font-size: 0.8em;
+    font-size: calc(0.3em + 1.9vh);
+    @media screen and (min-width: $breakpoint-2) {
+      font-size: 0.6em;
+    }
+    line-height: 2em;
+    // line-height: 0.4em;
+    background: transparentize($colors-black, 0.1);
     color: $colors-white;
     padding: 3% 3% 2%;
     padding: calc(3% - $small-v-unit);
     max-width: 80%;
+    width: 600px
   }
+
+// Component: kol
+
+h2 {
+  font-size: 1.333em;
+  margin-top: 0;
+  text-transform: uppercase;
 }
 
 // Todo: fallback
