@@ -146,11 +146,16 @@ function dpm(thing) {
   })();
 
   (function modal() {
-    $('.js-cta-link').click(function() {
-      $('.js-cta-modal').addClass('js-in');
+    var link = $('.js-cta-link');
+    var modal = $('.js-cta-modal');
+    link.click(function() {
+      modal.addClass('js-in');
     });
-    $('.js-cta-modal').click(function() {
-      $('.js-cta-modal').removeClass('js-in');
+    modal.click(function(e) {
+      if ($(e.target)[0].className !== modal[0].className) {
+        return;
+      }
+      modal.removeClass('js-in');
     });
   })();
 

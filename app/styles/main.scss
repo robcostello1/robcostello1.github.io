@@ -226,7 +226,7 @@ $section-text-shadow-offset: 10%;
 %table-bg {
   background-size: auto 100%;
   background-position: bottom;
-  max-width: 176vh;
+  // max-width: 176vh;
   margin: auto;
 }
 
@@ -243,7 +243,7 @@ $section-text-shadow-offset: 10%;
     height: $section-height/2;
     @extend %bg;
     @extend %table-bg;
-    background-image: url(../images/middle-top-bg-2.png);
+    background-image: url(../images/middle-top-bg-3.png);
   }
 
   .table {
@@ -256,7 +256,7 @@ $section-text-shadow-offset: 10%;
     right: 0;
     @extend %bg;
     @extend %table-bg;
-    background-image: url(../images/middle-bottom-bg-2.jpg);
+    background-image: url(../images/middle-bottom-bg-3.jpg);
   }
 
 // Component: cta
@@ -285,6 +285,7 @@ $section-text-shadow-offset: 10%;
   justify-content: center;
   flex-direction: column;
   @extend %reveal;
+  transition: opacity 0.5s $settings-bez;
   &.js-in {
     z-index: 20;
   }
