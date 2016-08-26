@@ -1,0 +1,139 @@
+// Make sure the charset is set appropriately
+@charset "UTF-8";
+
+// Comment out this import if you don't want to use normalize.
+@import "normalize";
+@import "bower_components/compass-mixins/lib/_compass.scss";
+
+//
+// Variables
+//
+
+// Gaps between things
+$v-unit: 24px;
+$small-v-unit: $v-unit/2;
+$h-unit: $v-unit;
+
+$total-columns: 12;
+
+$column-width: $h-unit*2;
+$gutter-width: $h-unit*1.5;
+$grid-padding: $small-v-unit;
+
+$breakpoint-1: 480px;
+$breakpoint-2: 768px;
+$breakpoint-3: 960px;
+$breakpoint-4: 1280px;
+
+$menu-breakpoint: $breakpoint-2;
+
+// Misc.
+
+$settings-easing: 2s cubic-bezier(0.215, 0.61, 0.355, 1);
+$settings-border-radius: 3px;
+
+//
+// Placeholder classes and mixins
+//
+
+// Main Menu - use these mixins to do your animations
+
+@mixin main-menu-element-hide() {
+  max-height: 0;
+  padding: 0;
+  opacity: 0;
+  z-index: 0;
+  overflow: hidden;
+  transition:   max-height 1s cubic-bezier(0.215, 0.61, 0.355, 1),
+                opacity 0.5s cubic-bezier(0.215, 0.61, 0.355, 1),
+                z-index 1s cubic-bezier(0.215, 0.61, 0.355, 1); // Helps with hiver corridors
+}
+
+@mixin main-menu-element-show() {
+  max-height: 600px; // Set this to the height of the tallest submenu
+  opacity: 1;
+  z-index: 10;
+  overflow: visible;
+}
+
+// Component: full-height
+
+%full-height {
+  min-height: 480px; // Fallback;
+  height: 100vh;
+}
+
+/* fix iOS bug not displaying 100vh correctly */
+/* ipad */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+  %full-height {
+    height: 768px;
+  }
+}
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+  %full-height {
+    height: 1024px;
+  }
+}
+/* iphone5 */
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2) {
+  %full-height {
+    height: 320px;
+  }
+}
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2) {
+  %full-height {
+    height: 568px;
+  }
+}
+/* iPhone 4 */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2) {
+  %full-height {
+    height: 320px;
+  }
+}
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
+  %full-height {
+    height: 480px;
+  }
+}
+
+//
+// Styles
+//
+
+*, *:before, *:after {
+  @include box-sizing(border-box);
+}
+
+html {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	min-height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+// Util classes
+.element-invisible {
+  @include element-invisible;
+}
+
+.element-invisible-override {
+  position: static !important;
+  clip: auto;
+  overflow: visible;
+  height: auto;
+}
+
+.cf {
+  @include clearfix;
+}
+
+.overflow-cf {
+  @include legacy-pie-clearfix;
+}

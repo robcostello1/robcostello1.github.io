@@ -1,0 +1,23 @@
+// Must not be within "position: static" container. I.e. "position: relative/absolute/fixed"
+@mixin utils-cover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@mixin element-invisible {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  height: 1px;
+}
+
+@mixin element-invisible-override {
+  position: static !important;
+  clip: auto;
+  overflow: visible;
+  height: auto;
+}
