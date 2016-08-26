@@ -99,6 +99,10 @@ $down-arrow-width: 7%;
   left: 50%;
   margin-left: -$down-arrow-width/2;
   width: $down-arrow-width;
+  @media screen and (orientation : portrait) {
+    margin-left: -$down-arrow-width;
+    width: $down-arrow-width*2;
+  }
   outline: none !important;
   z-index: 100;
   animation-name: throb;
@@ -106,7 +110,8 @@ $down-arrow-width: 7%;
   animation-iteration-count: infinite;
   animation-direction: alternate;
   &.js-out {
-    opacity: 0;
+    opacity: 0 !important;
+    z-index: -1;
   }
 }
 
@@ -174,7 +179,7 @@ $section-text-shadow-offset: 10%;
     position: absolute;
     top: -$section-text-shadow-offset/2;
     left: - $section-text-shadow-offset/2;
-    background: radial-gradient(ellipse at center, #170a00 0%, rgba(255, 255, 255, 0) 67%);
+    background: radial-gradient(ellipse at center, black 0%, rgba(0, 0, 0, 0) 67%);
   }
   > * {
     position: relative;
@@ -288,6 +293,7 @@ $section-text-shadow-offset: 10%;
     color: $colors-white;
     padding: 3% 3% 2%;
     padding: calc(3% - $small-v-unit);
+    max-width: 80%;
   }
 }
 
@@ -351,4 +357,29 @@ $section-text-shadow-offset: 10%;
   .section-3 {
     margin-top: $section-additional;
   }
+}
+
+/* ipad */
+// @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+
+// }
+// @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+// }
+// /* iphone5 */
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2) {
+  body {
+    font-size: 20px;
+  }
+}
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2) {
+  body {
+    font-size: 19px;
+  }
+}
+// /* iPhone 4 */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2) {
+
+}
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2) {
+
 }

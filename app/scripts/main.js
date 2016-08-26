@@ -12,9 +12,9 @@ function dpm(thing) {
   // At any point on page, check if on screen
   function onScreen(element, offset) {
     var bottomScroll = $(window).height() + $(window).scrollTop();
-    dpm(element)
-    dpm(bottomScroll)
-    dpm(element.offset().top + offset);
+    // dpm(element)
+    // dpm(bottomScroll)
+    // dpm(element.offset().top + offset);
     return bottomScroll > (element.offset().top + offset);
   }
 
@@ -24,13 +24,23 @@ function dpm(thing) {
       callback();
     }, 100);
 
-    $('main').scroll(callback);
+    if (parallaxEnabled()) {
+      $('main').scroll(callback);
+    }
+    else {
+      $(window).scroll(callback);
+    }
+  }
+
+  function parallaxEnabled() {
+    return $('.preserve3d').length > 0 && window.innerWidth > window.innerHeight;
   }
 
   // Display text when we scroll to it
   (function reveal() {
      $(document).ready(function() {
       var revealItems = $('.js-reveal');
+      var hideArrow = $('.js-hide-arrow');
       // Stop if none
       if (revealItems.length === 0) {
         return;
@@ -38,10 +48,13 @@ function dpm(thing) {
       readyAndScroll(function(){
         revealItems.each(function() {
           var item = $(this);
-          if (onScreen(item, 200) && !item.hasClass('js-in')) {
+          if (onScreen(item, 250) && !item.hasClass('js-in')) {
             setTimeout(function() {
               item.addClass('js-in');
             }, 700);
+            if (item.hasClass('js-hide-prev-arrow') && !hideArrow.hasClass('js-out')) {
+              hideArrow.addClass('js-out')
+            }
           }
         });
       });
@@ -67,7 +80,7 @@ function dpm(thing) {
   (function anchors() {
     // If parallax is possible
     // and we're in landscape, stop
-    if ($('.preserve3d').length > 0 && window.innerWidth > window.innerHeight) {
+    if (parallaxEnabled()) {
       return;
     }
 
@@ -92,7 +105,7 @@ function dpm(thing) {
   (function parallaxAnchors() {
     // If parallax is not possible (which means we don't try)
     // or we're in portrait, stop
-    if ($('.preserve3d').length === 0 || window.innerWidth < window.innerHeight) {
+    if (!parallaxEnabled()) {
       return;
     }
 
@@ -132,5 +145,13 @@ function dpm(thing) {
     });
   })();
 
+  (function modal() {
+    $('.js-cta-link').click(function() {
+      $('.js-cta-modal').addClass('js-in');
+    });
+    $('.js-cta-modal').click(function() {
+      $('.js-cta-modal').removeClass('js-in');
+    });
+  })();
 
 })(jQuery);
